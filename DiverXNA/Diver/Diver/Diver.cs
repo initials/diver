@@ -61,7 +61,7 @@ namespace Diver
 
             play("idle");
 
-            this.maxVelocity = new Vector2(600, 3500);
+            this.maxVelocity = new Vector2(600, 1500);
 
             this.velocity.X = 0;
             acceleration.Y = 980;
@@ -74,10 +74,10 @@ namespace Diver
         {
             //Console.WriteLine(Name);
 
-            if (Name == "swan" && FrameIndex == 18)
+            if (Name == "swan")
             {
                 FlxG.score += 10;
-                Console.WriteLine("Swan Dive Bonus!");
+                Console.WriteLine("Swan Dive Bonus! on frame "+ FrameIndex);
 
             }
 
@@ -97,21 +97,32 @@ namespace Diver
         /// </summary>
         override public void update()
         {
+            Console.WriteLine("Mode: " + mode);
 
-            if (FlxG.keys.justPressed(Keys.X) && mode=="idle" && this.onFloor)
+            if (mode == "dead")
+            {
+                acceleration.X = 0;
+                acceleration.Y = 0;
+                velocity.X = 0;
+                velocity.Y = 0;
+
+                FlxG.fade.start(Color.Red, 2.0f);
+            }
+
+            if (FlxG.keys.justPressed(Keys.Space) && mode=="idle" && this.onFloor)
             {
                 play("swan");
                 velocity.Y = -300;
                 mode = "swan";
 
             }
-            else if (FlxG.keys.justPressed(Keys.X) && mode == "swan")
+            else if (FlxG.keys.justPressed(Keys.Space) && mode == "swan")
             {
                 play("dive");
                 mode = "dive";
 
             }
-            else if (FlxG.keys.justPressed(Keys.X) && mode == "enterWater")
+            else if (FlxG.keys.justPressed(Keys.Space) && mode == "enterWater")
             {
                 //Console.WriteLine("Pressed X");
 
@@ -150,15 +161,7 @@ namespace Diver
 
             }
 
-            if (mode == "dead")
-            {
-                acceleration.X = 0;
-                acceleration.Y = 0;
-                velocity.X = 0;
-                velocity.Y = 0;
 
-                FlxG.fade.start(Color.Red, 2.0f);
-            }
 
             base.update();
         }
@@ -179,7 +182,9 @@ namespace Diver
         /// <param name="Velocity">The Velocity that is will now have???</param>
         public override void hitBottom(FlxObject Contact, float Velocity)
         {
-            if (mode == "swan" || mode=="dive" || mode=="enterWater" || mode=="swim")
+            
+
+            if (mode != "idle")
             {
                 play("hitFloor");
                 mode = "dead";
