@@ -78,8 +78,6 @@ E:\VisualStudio2010\diver\DiverXNA\Diver\Diver\bin\x86\Debug\OgmoEditor2\SportsG
 E:\VisualStudio2010\diver\DiverXNA\Diver\Diver\bin\x86\Debug\Content\bubble.xnb
 E:\VisualStudio2010\diver\DiverXNA\Diver\Diver\bin\x86\Debug\Content\diver_02.xnb
 E:\VisualStudio2010\diver\DiverXNA\Diver\Diver\bin\x86\Debug\Content\tile.xnb
-E:\VisualStudio2010\diver\DiverXNA\Diver\Diver\bin\x86\Debug\XFlixelTemplate.exe
-E:\VisualStudio2010\diver\DiverXNA\Diver\Diver\bin\x86\Debug\XFlixelTemplate.pdb
 E:\VisualStudio2010\diver\DiverXNA\Diver\Diver\bin\x86\Debug\Flixel.exe
 E:\VisualStudio2010\diver\DiverXNA\Diver\Diver\bin\x86\Debug\FarseerPhysics XNA.dll
 E:\VisualStudio2010\diver\DiverXNA\Diver\Diver\bin\x86\Debug\Flixel.pdb
@@ -87,5 +85,9 @@ E:\VisualStudio2010\diver\DiverXNA\Diver\Diver\bin\x86\Debug\FarseerPhysics XNA.
 E:\VisualStudio2010\diver\DiverXNA\Diver\Diver\bin\x86\Debug\FarseerPhysics XNA.xml
 E:\VisualStudio2010\diver\DiverXNA\Diver\Diver\obj\x86\Debug\Diver.csprojResolveAssemblyReference.cache
 E:\VisualStudio2010\diver\DiverXNA\Diver\Diver\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
-E:\VisualStudio2010\diver\DiverXNA\Diver\Diver\obj\x86\Debug\XFlixelTemplate.exe
-E:\VisualStudio2010\diver\DiverXNA\Diver\Diver\obj\x86\Debug\XFlixelTemplate.pdb
+E:\VisualStudio2010\diver\DiverXNA\Diver\Diver\bin\x86\Debug\dive.exe
+E:\VisualStudio2010\diver\DiverXNA\Diver\Diver\bin\x86\Debug\dive.pdb
+E:\VisualStudio2010\diver\DiverXNA\Diver\Diver\obj\x86\Debug\dive.exe
+E:\VisualStudio2010\diver\DiverXNA\Diver\Diver\obj\x86\Debug\dive.pdb
+E:\VisualStudio2010\diver\DiverXNA\Diver\Diver\bin\x86\Debug\Content\poolSide.xnb
+E:\VisualStudio2010\diver\DiverXNA\Diver\Diver\bin\x86\Debug\Content\diver_03.xnb

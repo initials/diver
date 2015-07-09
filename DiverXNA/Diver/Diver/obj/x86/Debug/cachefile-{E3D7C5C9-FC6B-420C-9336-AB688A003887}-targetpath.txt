@@ -1,3 +1,5 @@
 Content\bubble.xnb
 Content\diver_02.xnb
 Content\tile.xnb
+Content\poolSide.xnb
+Content\diver_03.xnb

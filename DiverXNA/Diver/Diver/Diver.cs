@@ -23,9 +23,18 @@ namespace Diver
         public Diver(int xPos, int yPos)
             : base(xPos, yPos)
         {
-            loadGraphic("diver_02", true, false, 64, 64);
 
-            addAnimation("idle", new int[] { 8 }, 0, true);
+
+
+            loadGraphic("diver_03", true, false, 64, 64);
+
+            width = 16;
+            height = 48;
+
+            setOffset(20, 16);
+
+
+            addAnimation("idle", new int[] { 81,82 }, 4, true);
 
             addAnimation("run1", this.generateFrameNumbersBetween(0, 5), 1, true);
             addAnimation("run2", this.generateFrameNumbersBetween(0, 5), 2, true);
@@ -40,7 +49,11 @@ namespace Diver
 
             addAnimation("enterWater", this.generateFrameNumbersBetween(28,31), 16, false);
             addAnimation("swim", this.generateFrameNumbersBetween(31, 64), 16, true);
-            addAnimation("hitFloor", new int[] { 78,79 }, 12, true);
+            addAnimation("exitWater", this.generateFrameNumbersBetween(65, 72), 16, false);
+
+            addAnimation("breathe", new int[] { 83,84 }, 2, true);
+
+            addAnimation("hitFloor", new int[] { 15,16 }, 12, true);
 
             addAnimationCallback(animCallback);
 
@@ -48,7 +61,7 @@ namespace Diver
 
             play("idle");
 
-            this.maxVelocity = new Vector2(15000, 15000);
+            this.maxVelocity = new Vector2(600, 3500);
 
             this.velocity.X = 0;
             acceleration.Y = 980;
@@ -59,12 +72,24 @@ namespace Diver
 
         public void animCallback(string Name, uint Frame, int FrameIndex)
         {
-            if (Name == "enterWater" && FrameIndex == 51)
+            //Console.WriteLine(Name);
+
+            if (Name == "swan" && FrameIndex == 18)
             {
-                //mode = "swim";
-                //play("swim");
+                FlxG.score += 10;
+                Console.WriteLine("Swan Dive Bonus!");
 
             }
+
+            if (Name == "exitWater" && FrameIndex == 72)
+            {
+                x -= 16;
+                y -= 16;
+                play("breathe");
+                this.velocity.X = 0;
+                acceleration.Y = 980;
+            }
+
         }
 
         /// <summary>
@@ -76,33 +101,33 @@ namespace Diver
             if (FlxG.keys.justPressed(Keys.X) && mode=="idle" && this.onFloor)
             {
                 play("swan");
-                
                 velocity.Y = -300;
-
                 mode = "swan";
 
             }
             else if (FlxG.keys.justPressed(Keys.X) && mode == "swan")
             {
                 play("dive");
-
                 mode = "dive";
 
             }
             else if (FlxG.keys.justPressed(Keys.X) && mode == "enterWater")
             {
-                setDrags(0, 2555);
+                //Console.WriteLine("Pressed X");
+
+                setDrags(25, 2555);
                 acceleration.Y = 0;
 
                 mode = "swim";
                 play("swim");
 
-
             }
 
-
-
-
+            if (mode == "swim" && velocity.Y == 0)
+            {
+                setDrags(25, 25);
+                acceleration.Y = -125;
+            }
 
             if (FlxControl.LEFTJUSTPRESSED && mode == "idle")
             {
@@ -132,9 +157,8 @@ namespace Diver
                 velocity.X = 0;
                 velocity.Y = 0;
 
+                FlxG.fade.start(Color.Red, 2.0f);
             }
-
-
 
             base.update();
         }
@@ -155,7 +179,7 @@ namespace Diver
         /// <param name="Velocity">The Velocity that is will now have???</param>
         public override void hitBottom(FlxObject Contact, float Velocity)
         {
-            if (mode == "swan")
+            if (mode == "swan" || mode=="dive" || mode=="enterWater" || mode=="swim")
             {
                 play("hitFloor");
                 mode = "dead";
@@ -171,6 +195,20 @@ namespace Diver
         /// <param name="Velocity"></param>
         public override void hitLeft(FlxObject Contact, float Velocity)
         {
+            Console.WriteLine("Score: " + FlxG.score.ToString());
+
+            if (mode == "swimUp")
+            {
+                play("exitWater");
+                mode = "exitWater";
+
+                acceleration.X = 0;
+                acceleration.Y = 0;
+                velocity.X = 0;
+                velocity.Y = 0;
+                setDrags(25, 25);
+            }
+
             base.hitLeft(Contact, Velocity);
         }
 

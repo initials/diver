@@ -16,6 +16,8 @@ namespace Diver
         Bubbles bubbles;
         FlxTileblock tile;
         FlxTileblock bgTile;
+        FlxTileblock poolBottom;
+        FlxSprite poolSide;
 
         public int diveHeight;
         public int poolDepth;
@@ -23,8 +25,8 @@ namespace Diver
         override public void create()
         {
             //load level settings
-            diveHeight = 550;
-            poolDepth = 400;
+            diveHeight = 1550;
+            poolDepth = 700;
 
             FlxG.backColor = new Color(0,116,239);
             base.create();
@@ -34,8 +36,6 @@ namespace Diver
             bgTile.loadTiles("tile", 9, 9, 0);
             bgTile.alpha = 0.125f;
             add(bgTile);
-
-
 
             tile = new FlxTileblock(7000, 90, 1800, 1800);
             tile.auto = FlxTileblock.OFF;
@@ -48,6 +48,17 @@ namespace Diver
             bgTile.alpha = 0.225f;
             add(bgTile);
 
+            poolBottom = new FlxTileblock(5000, diveHeight + poolDepth, 2700, 90);
+            poolBottom.auto = FlxTileblock.OFF;
+            poolBottom.loadTiles("tile", 9, 9, 0);
+            add(poolBottom);
+
+            poolSide = new FlxSprite(-900, diveHeight-3);
+            poolSide.loadGraphic("poolSide", false, false, 180, 180);
+            poolSide.@fixed = true;
+            poolSide.solid = true;
+            //poolSide.moves = false;
+            add(poolSide);
 
             diver = new Diver(8000, 90-64);
             add(diver);
@@ -70,22 +81,40 @@ namespace Diver
         {
 
             FlxU.collide(diver, tile);
+            FlxU.collide(diver, poolBottom);
+            FlxU.collide(diver, poolSide);
 
-            if (diver.y > diveHeight && bubbles.canExplode < 25)
+            if (diver.y > diveHeight && bubbles.canExplode < 25  && diver.mode!="swim")
             {
                 bubbles.at(diver);
-
-                //bubbleParticle.start(false, 0.0101f, 1500);
 
                 bubbles.start(false, 0.0025f, 12);
                 bubbles.canExplode ++;
 
-
-                //diver.setDrags(500, 2555);
-                //diver.acceleration.Y = 0;
-
                 diver.play("enterWater");
                 diver.mode = "enterWater";
+
+            }
+
+            if (diver.mode == "swim" && diver.y <= diveHeight - diver.height/2 && poolSide.x==-900)
+            {
+                diver.mode = "swimUp";
+                diver.acceleration.Y = 0;
+                diver.velocity.Y = 0;
+
+                float poolSideNumber = diver.x - 435 - poolSide.width;
+                Console.WriteLine(poolSideNumber + "   " + Convert.ToInt32(1.0f / ((diveHeight + poolDepth) - diver.y) * 1000).ToString());
+
+                poolSide.x = poolSideNumber;
+
+                float x = (float)((diveHeight + poolDepth) - diver.y);
+                Console.WriteLine(x);
+
+                //FlxG.score += Convert.ToInt32(1.0f / (float)(((diveHeight + poolDepth) - diver.y)) * 1000);
+
+
+
+
 
 
             }
