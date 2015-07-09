@@ -60,7 +60,7 @@ namespace Diver
             //poolSide.moves = false;
             add(poolSide);
 
-            diver = new Diver(8000, 90-64);
+            diver = new Diver(8000, 90-48);
             add(diver);
 
             bubbles = new Bubbles(0, 0);
@@ -103,19 +103,14 @@ namespace Diver
                 diver.velocity.Y = 0;
 
                 float poolSideNumber = diver.x - 435 - poolSide.width;
-                Console.WriteLine(poolSideNumber + "   " + Convert.ToInt32(1.0f / ((diveHeight + poolDepth) - diver.y) * 1000).ToString());
+                //Console.WriteLine(poolSideNumber + "   " + Convert.ToInt32(1.0f / ((diveHeight + poolDepth) - diver.y) * 1000).ToString());
 
                 poolSide.x = poolSideNumber;
 
                 float x = (float)((diveHeight + poolDepth) - diver.y);
-                Console.WriteLine(x);
+                //Console.WriteLine(x);
 
                 //FlxG.score += Convert.ToInt32(1.0f / (float)(((diveHeight + poolDepth) - diver.y)) * 1000);
-
-
-
-
-
 
             }
 

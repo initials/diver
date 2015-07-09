@@ -97,7 +97,7 @@ namespace Diver
         /// </summary>
         override public void update()
         {
-            Console.WriteLine("Mode: " + mode);
+            //Console.WriteLine("Mode: " + mode);
 
             if (mode == "dead")
             {
@@ -126,7 +126,7 @@ namespace Diver
             {
                 //Console.WriteLine("Pressed X");
 
-                setDrags(25, 2555);
+                setDrags(25, 4555);
                 acceleration.Y = 0;
 
                 mode = "swim";
@@ -182,9 +182,8 @@ namespace Diver
         /// <param name="Velocity">The Velocity that is will now have???</param>
         public override void hitBottom(FlxObject Contact, float Velocity)
         {
-            
 
-            if (mode != "idle")
+            if (mode == "swan" || mode == "dive" || mode == "enterWater" || mode == "swim")
             {
                 play("hitFloor");
                 mode = "dead";
