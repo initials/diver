@@ -46,6 +46,9 @@ namespace Diver
             addAnimation("swim", this.generateFrameNumbersBetween(31, 64), 16, true);
             addAnimation("exitWater", this.generateFrameNumbersBetween(65, 72), 16, false);
 
+            addAnimation("fall", new int[] { 7,8,9,10,11,12,13,14,15 }, 24, true);
+
+
             addAnimation("breathe", new int[] { 83,84 }, 2, true);
 
             addAnimation("hitFloor", new int[] { 85,86,86,86,87 }, 16, false);
@@ -62,6 +65,21 @@ namespace Diver
             acceleration.Y = 980;
 
             mode = "idle";
+
+        }
+
+        public void check()
+        {
+            //Console.WriteLine(_curFrame);
+
+            if (_curFrame >= 6 && _curAnim.name == "dive")
+            {
+                Globals.addScore(100, "Perfect Entry");
+            }
+            else
+            {
+                Globals.addScore(-1000, "Failed Entry");
+            }
 
         }
 
@@ -87,6 +105,14 @@ namespace Diver
         {
             //Console.WriteLine("Mode: " + mode);
 
+            if (_curFrame == 11 && _curAnim.name == "swan")
+            {
+                Globals.addScore(5, "Swan Bonus");
+
+
+            }
+
+
             if (mode == "dead")
             {
                 acceleration.X = 0;
@@ -106,6 +132,14 @@ namespace Diver
                 Console.WriteLine("Jumped! at {0} - dive Point {1} - distance {2}", x, Globals.jumpPoint, x - Globals.jumpPoint);
 
             }
+            else if (mode == "idle" && this.velocity.Y > 0)
+            {
+                play("fall");
+                mode = "fall";
+
+            }
+
+
             else if (FlxG.keys.justPressed(Keys.Space) && mode == "swan")
             {
                 play("dive");
@@ -114,7 +148,6 @@ namespace Diver
             }
             else if (FlxG.keys.justPressed(Keys.Space) && mode == "enterWater")
             {
-                //Console.WriteLine("Pressed X");
 
                 setDrags(25, 4555);
                 acceleration.Y = 0;
@@ -130,12 +163,12 @@ namespace Diver
                 acceleration.Y = -125;
             }
 
-            if (FlxControl.LEFTJUSTPRESSED && mode == "idle")
+            if (FlxControl.LEFTJUSTPRESSED && (mode == "idle" || mode == "swim"))
             {
                 velocity.X -= 46;
                 animation();
             }
-            if (FlxControl.RIGHTJUSTPRESSED && mode == "idle")
+            if (FlxControl.RIGHTJUSTPRESSED && (mode == "idle" || mode == "swim"))
             {
                 velocity.X += 46;
                 animation();
@@ -162,6 +195,7 @@ namespace Diver
         public void animation()
         {
             if (this.velocity.X == 0) play("idle");
+            else if (mode == "swim") play("swim");
             //else if (Math.Abs(this.velocity.X) < 75 * 4) play("run4");
             else if (Math.Abs(this.velocity.X) < 150 * 4) play("run8");
             else if (Math.Abs(this.velocity.X) < 225 * 4) play("run16");
@@ -204,7 +238,7 @@ namespace Diver
         {
             //Console.WriteLine("HITLEFT - Score: " + FlxG.score.ToString() + " " + Velocity);
 
-            if (mode == "swimUp")
+            if (y <= Globals.diveHeight - height / 2)
             {
                 play("exitWater");
                 mode = "exitWater";
@@ -214,6 +248,10 @@ namespace Diver
                 velocity.X = 0;
                 velocity.Y = 0;
                 setDrags(25, 25);
+            }
+            else
+            {
+
             }
 
             base.hitLeft(Contact, Velocity);

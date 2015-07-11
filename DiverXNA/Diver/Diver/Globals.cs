@@ -23,6 +23,17 @@ namespace Diver
 
         }
 
+        public static void addScore(int Score, string Message)
+        {
+            FlxG.score += Score;
+
+            if (FlxG.score < 0)
+                FlxG.score = 0;
+
+            Console.WriteLine("{0} Your score is now: {1}", Message, FlxG.score);
+
+        }
+
 
     }
 }

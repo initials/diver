@@ -19,9 +19,6 @@ namespace Diver
         FlxTileblock poolBottom;
         FlxTileblock poolSide;
 
-        
-
-
         override public void create()
         {
             //load level settings
@@ -54,7 +51,7 @@ namespace Diver
 
             bgTile = new FlxTileblock(0, 0, (int)poolSide.width + Globals.poolWidth + 900, Globals.diveHeight);
             bgTile.auto = FlxTileblock.OFF;
-            bgTile.loadTiles("tile", 9, 9, 0);
+            bgTile.loadTiles("tile", 9, 9, 3);
             bgTile.alpha = 0.125f;
             add(bgTile);
 
@@ -64,8 +61,6 @@ namespace Diver
             divingPlatform.auto = FlxTileblock.OFF;
             divingPlatform.loadTiles("tile", 9,9,0);
             add(divingPlatform);
-
-
 
             poolBottom = new FlxTileblock(0, Globals.diveHeight + Globals.poolDepth, 2700, 90);
             poolBottom.auto = FlxTileblock.OFF;
@@ -82,12 +77,31 @@ namespace Diver
 
             FlxG.followBounds(0, 0, (int)(poolSide.width + Globals.poolWidth + divingPlatform.width), 9000);
 
+            FlxG.score = 0;
 
         }
 
         override public void update()
         {
-            //Console.WriteLine("Mode : {0} Diver Y {1}", diver.mode, diver.y);
+            
+            if (FlxControl.LEFT)
+            {
+                FlxG._game.hud.setHudGamepadButton(FlxHud.TYPE_XBOX, FlxHud.xboxDPadLeft, 0, 0);
+                FlxG.showHud();
+                //FlxG._game.hud.timeToShowButton = 1.5f;
+            }
+
+            else if (FlxControl.ACTION)
+            {
+                FlxG._game.hud.setHudGamepadButton(FlxHud.TYPE_XBOX, FlxHud.xboxButtonA, 0, 0);
+                FlxG.showHud();
+                //FlxG._game.hud.timeToShowButton = 1.5f;
+
+            }
+            else
+            {
+                FlxG.hideHud();
+            }
 
             FlxU.collide(diver, divingPlatform);
             FlxU.collide(diver, poolBottom);
@@ -100,6 +114,9 @@ namespace Diver
                 bubbles.start(false, 0.0025f, 12);
                 bubbles.canExplode ++;
 
+                if (diver.mode!="enterWater")
+                    diver.check();
+
                 diver.play("enterWater");
                 diver.mode = "enterWater";
 
@@ -107,16 +124,8 @@ namespace Diver
 
             if (diver.mode == "swim" && diver.y <= Globals.diveHeight - diver.height/2 )
             {
-                diver.mode = "swimUp";
                 diver.acceleration.Y = 0;
-                diver.velocity.Y = 0;
-
-                diver.velocity.X = -50;
-
-                //float poolSideNumber = diver.x - 435 - poolSide.width;
-                //poolSide.x = poolSideNumber;
-                //float x = (float)((Globals.diveHeight + Globals.poolDepth) - diver.y);
-
+                diver.velocity.Y = -10;
             }
 
             if (FlxControl.CANCELJUSTPRESSED)

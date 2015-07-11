@@ -34,13 +34,19 @@ namespace Diver
             
             this.gravity = -9.8f;
             this.createSprites(FlxG.Content.Load<Texture2D>("bubble"), 1200, true, 1.0f, 0.65f);
-
             
             this.canExplode = 0;
         }
 
         override public void update()
         {
+            foreach (FlxSprite item in this.members)
+            {
+                if (item.y < Globals.diveHeight)
+                {
+                    item.kill();
+                }
+            }
             base.update();
         }
 

@@ -1,1 +1,2 @@
 E:\VisualStudio2010\diver\DiverXNA\Diver\DiverContent\obj\x86\Debug\DiverContent.contentprojResolveAssemblyReference.cache
+C:\Users\Shane\Documents\Visual Studio 2010\Projects\diver\DiverXNA\Diver\DiverContent\obj\x86\Debug\DiverContent.contentprojResolveAssemblyReference.cache
