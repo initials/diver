@@ -166,6 +166,7 @@
   <ItemGroup>
     <Compile Include="Bubbles.cs" />
     <Compile Include="Diver.cs" />
+    <Compile Include="Globals.cs" />
     <Compile Include="IntroState.cs" />
     <Compile Include="Logo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

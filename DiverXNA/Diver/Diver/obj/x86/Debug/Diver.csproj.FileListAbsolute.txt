@@ -91,3 +91,4 @@ E:\VisualStudio2010\diver\DiverXNA\Diver\Diver\obj\x86\Debug\dive.exe
 E:\VisualStudio2010\diver\DiverXNA\Diver\Diver\obj\x86\Debug\dive.pdb
 E:\VisualStudio2010\diver\DiverXNA\Diver\Diver\bin\x86\Debug\Content\poolSide.xnb
 E:\VisualStudio2010\diver\DiverXNA\Diver\Diver\bin\x86\Debug\Content\diver_03.xnb
+E:\VisualStudio2010\diver\DiverXNA\Diver\Diver\bin\x86\Debug\Content\diver_04.xnb

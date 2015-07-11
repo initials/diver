@@ -14,7 +14,6 @@ namespace Diver
 {
     class Diver : FlxSprite
     {
-
         /// <summary>
         /// Sprite Constructor
         /// </summary>
@@ -23,16 +22,12 @@ namespace Diver
         public Diver(int xPos, int yPos)
             : base(xPos, yPos)
         {
-
-
-
-            loadGraphic("diver_03", true, false, 64, 64);
+            loadGraphic("diver_04", true, false, 64, 64);
 
             width = 16;
             height = 48;
 
             setOffset(20, 16);
-
 
             addAnimation("idle", new int[] { 81,82 }, 4, true);
 
@@ -53,7 +48,7 @@ namespace Diver
 
             addAnimation("breathe", new int[] { 83,84 }, 2, true);
 
-            addAnimation("hitFloor", new int[] { 15,16 }, 12, true);
+            addAnimation("hitFloor", new int[] { 85,86,86,86,87 }, 16, false);
 
             addAnimationCallback(animCallback);
 
@@ -61,7 +56,7 @@ namespace Diver
 
             play("idle");
 
-            this.maxVelocity = new Vector2(600, 1500);
+            this.maxVelocity = new Vector2(600, 600);
 
             this.velocity.X = 0;
             acceleration.Y = 980;
@@ -73,13 +68,6 @@ namespace Diver
         public void animCallback(string Name, uint Frame, int FrameIndex)
         {
             //Console.WriteLine(Name);
-
-            if (Name == "swan")
-            {
-                FlxG.score += 10;
-                Console.WriteLine("Swan Dive Bonus! on frame "+ FrameIndex);
-
-            }
 
             if (Name == "exitWater" && FrameIndex == 72)
             {
@@ -115,6 +103,8 @@ namespace Diver
                 velocity.Y = -300;
                 mode = "swan";
 
+                Console.WriteLine("Jumped! at {0} - dive Point {1} - distance {2}", x, Globals.jumpPoint, x - Globals.jumpPoint);
+
             }
             else if (FlxG.keys.justPressed(Keys.Space) && mode == "swan")
             {
@@ -142,28 +132,41 @@ namespace Diver
 
             if (FlxControl.LEFTJUSTPRESSED && mode == "idle")
             {
-                velocity.X -= 75;
-
-                if (this.velocity.X == 0) play("idle");
-                else if (Math.Abs(this.velocity.X) < 75 * 4) play("run4");
-                else if (Math.Abs(this.velocity.X) < 150 * 4) play("run8");
-                else if (Math.Abs(this.velocity.X) < 225 * 4) play("run16");
-                else if (Math.Abs(this.velocity.X) < 300 * 4) play("run24");
-                else if (Math.Abs(this.velocity.X) < 375 * 4) play("run32");
-
+                velocity.X -= 46;
+                animation();
             }
             if (FlxControl.RIGHTJUSTPRESSED && mode == "idle")
             {
-                velocity.X += 75;
+                velocity.X += 46;
+                animation();
+            }
 
-                if (this.velocity.X == 0) play("idle");
-                else play("run16");
 
+
+
+
+            if (velocity.X > 0)
+            {
+                facing = Flx2DFacing.Left;
+            }
+            else if (velocity.X < 0)
+            {
+                facing = Flx2DFacing.Right;
             }
 
 
 
             base.update();
+        }
+
+        public void animation()
+        {
+            if (this.velocity.X == 0) play("idle");
+            //else if (Math.Abs(this.velocity.X) < 75 * 4) play("run4");
+            else if (Math.Abs(this.velocity.X) < 150 * 4) play("run8");
+            else if (Math.Abs(this.velocity.X) < 225 * 4) play("run16");
+            else if (Math.Abs(this.velocity.X) < 300 * 4) play("run24");
+            else if (Math.Abs(this.velocity.X) < 375 * 4) play("run32");
         }
 
         /// <summary>
@@ -199,7 +202,7 @@ namespace Diver
         /// <param name="Velocity"></param>
         public override void hitLeft(FlxObject Contact, float Velocity)
         {
-            Console.WriteLine("Score: " + FlxG.score.ToString());
+            //Console.WriteLine("HITLEFT - Score: " + FlxG.score.ToString() + " " + Velocity);
 
             if (mode == "swimUp")
             {

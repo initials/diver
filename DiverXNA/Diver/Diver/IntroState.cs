@@ -14,77 +14,86 @@ namespace Diver
     {
         Diver diver;
         Bubbles bubbles;
-        FlxTileblock tile;
+        FlxTileblock divingPlatform;
         FlxTileblock bgTile;
         FlxTileblock poolBottom;
-        FlxSprite poolSide;
+        FlxTileblock poolSide;
 
-        public int diveHeight;
-        public int poolDepth;
+        
+
 
         override public void create()
         {
             //load level settings
-            diveHeight = 1550;
-            poolDepth = 700;
+
 
             FlxG.backColor = new Color(0,116,239);
             base.create();
 
-            bgTile = new FlxTileblock(5000, 0, 2700, 900);
+            FlxLine x = new FlxLine(0, 0, new Vector2(0, Globals.diveHeight),
+                new Vector2(9000, Globals.diveHeight),
+                Color.White, 2);
+            add(x);
+
+            x = new FlxLine(0, 0, new Vector2(0, Globals.diveHeight + Globals.poolDepth),
+                new Vector2(9000, Globals.diveHeight + Globals.poolDepth),
+                Color.White, 2);
+            add(x);
+
+            poolSide = new FlxTileblock(0, Globals.diveHeight - 3, 900, 1800);
+            poolSide.auto = FlxTileblock.OFF;
+            poolSide.loadTiles("tile", 9, 9, 0);
+
+            FlxTileblock poolTile = new FlxTileblock(0, Globals.diveHeight, (int)poolSide.width + Globals.poolWidth + 900, Globals.poolDepth);
+            poolTile.auto = FlxTileblock.OFF;
+            poolTile.loadTiles("tile", 9, 9, 0);
+            poolTile.alpha = 0.5225f;
+            add(poolTile);
+
+            add(poolSide);
+
+            bgTile = new FlxTileblock(0, 0, (int)poolSide.width + Globals.poolWidth + 900, Globals.diveHeight);
             bgTile.auto = FlxTileblock.OFF;
             bgTile.loadTiles("tile", 9, 9, 0);
             bgTile.alpha = 0.125f;
             add(bgTile);
 
-            tile = new FlxTileblock(7000, 90, 1800, 1800);
-            tile.auto = FlxTileblock.OFF;
-            tile.loadTiles("tile", 9,9,0);
-            add(tile);
+            Globals.jumpPoint = (int)poolSide.width + Globals.poolWidth;
 
-            bgTile = new FlxTileblock(5000, diveHeight, 2700, poolDepth);
-            bgTile.auto = FlxTileblock.OFF;
-            bgTile.loadTiles("tile", 9, 9, 0);
-            bgTile.alpha = 0.225f;
-            add(bgTile);
+            divingPlatform = new FlxTileblock(Globals.jumpPoint, 90, 900, 1800);
+            divingPlatform.auto = FlxTileblock.OFF;
+            divingPlatform.loadTiles("tile", 9,9,0);
+            add(divingPlatform);
 
-            poolBottom = new FlxTileblock(5000, diveHeight + poolDepth, 2700, 90);
+
+
+            poolBottom = new FlxTileblock(0, Globals.diveHeight + Globals.poolDepth, 2700, 90);
             poolBottom.auto = FlxTileblock.OFF;
             poolBottom.loadTiles("tile", 9, 9, 0);
             add(poolBottom);
 
-            poolSide = new FlxSprite(-900, diveHeight-3);
-            poolSide.loadGraphic("poolSide", false, false, 180, 180);
-            poolSide.@fixed = true;
-            poolSide.solid = true;
-            //poolSide.moves = false;
-            add(poolSide);
-
-            diver = new Diver(8000, 90-48);
+            diver = new Diver((int)(divingPlatform.x + divingPlatform.width - 64), 90-48);
             add(diver);
 
             bubbles = new Bubbles(0, 0);
             add(bubbles);
 
             FlxG.follow(diver, 50);
-            
-            FlxG.followBounds(0, 0, 9000, 9000);
 
-            FlxLine x = new FlxLine(0, 0, new Vector2(0, diveHeight), new Vector2(9000, diveHeight), Color.White, 2);
-            add(x);
+            FlxG.followBounds(0, 0, (int)(poolSide.width + Globals.poolWidth + divingPlatform.width), 9000);
 
-            x = new FlxLine(0, 0, new Vector2(0, diveHeight + poolDepth), new Vector2(9000, diveHeight + poolDepth), Color.White, 2);
-            add(x);
+
         }
 
         override public void update()
         {
+            //Console.WriteLine("Mode : {0} Diver Y {1}", diver.mode, diver.y);
 
-            FlxU.collide(diver, tile);
+            FlxU.collide(diver, divingPlatform);
             FlxU.collide(diver, poolBottom);
             FlxU.collide(diver, poolSide);
 
-            if (diver.y > diveHeight && bubbles.canExplode < 25  && diver.mode!="swim")
+            if (diver.y > Globals.diveHeight && bubbles.canExplode < 25  && diver.mode!="swim")
             {
                 bubbles.at(diver);
 
@@ -96,21 +105,17 @@ namespace Diver
 
             }
 
-            if (diver.mode == "swim" && diver.y <= diveHeight - diver.height/2 && poolSide.x==-900)
+            if (diver.mode == "swim" && diver.y <= Globals.diveHeight - diver.height/2 )
             {
                 diver.mode = "swimUp";
                 diver.acceleration.Y = 0;
                 diver.velocity.Y = 0;
 
-                float poolSideNumber = diver.x - 435 - poolSide.width;
-                //Console.WriteLine(poolSideNumber + "   " + Convert.ToInt32(1.0f / ((diveHeight + poolDepth) - diver.y) * 1000).ToString());
+                diver.velocity.X = -50;
 
-                poolSide.x = poolSideNumber;
-
-                float x = (float)((diveHeight + poolDepth) - diver.y);
-                //Console.WriteLine(x);
-
-                //FlxG.score += Convert.ToInt32(1.0f / (float)(((diveHeight + poolDepth) - diver.y)) * 1000);
+                //float poolSideNumber = diver.x - 435 - poolSide.width;
+                //poolSide.x = poolSideNumber;
+                //float x = (float)((Globals.diveHeight + Globals.poolDepth) - diver.y);
 
             }
 
