@@ -14,6 +14,9 @@ namespace Diver
 {
     class Diver : FlxSprite
     {
+        public bool hasEnteredWater;
+        private float deepestPointOfDive;
+
         /// <summary>
         /// Sprite Constructor
         /// </summary>
@@ -24,10 +27,10 @@ namespace Diver
         {
             loadGraphic("diver_04", true, false, 64, 64);
 
-            width = 16;
+            width = 48;
             height = 48;
 
-            setOffset(20, 16);
+            setOffset(8, 16);
 
             addAnimation("idle", new int[] { 81,82 }, 4, true);
 
@@ -43,10 +46,14 @@ namespace Diver
             addAnimation("dive", this.generateFrameNumbersBetween(18,27), 16, false);
 
             addAnimation("enterWater", this.generateFrameNumbersBetween(28,31), 16, false);
-            addAnimation("swim", this.generateFrameNumbersBetween(31, 64), 16, true);
+
+            addAnimation("glide", this.generateFrameNumbersBetween(31, 52), 16, true);
+            addAnimation("swim", this.generateFrameNumbersBetween(44, 64), 16, true);
+
+
             addAnimation("exitWater", this.generateFrameNumbersBetween(65, 72), 16, false);
 
-            addAnimation("fall", new int[] { 7,8,9,10,11,12,13,14,15 }, 24, true);
+            addAnimation("fall", new int[] { 7,26 }, 24, true);
 
 
             addAnimation("breathe", new int[] { 83,84 }, 2, true);
@@ -65,6 +72,12 @@ namespace Diver
             acceleration.Y = 980;
 
             mode = "idle";
+
+            hasEnteredWater = false;
+
+            //FlxG.showBounds = true;
+
+            deepestPointOfDive = 0;
 
         }
 
@@ -92,10 +105,20 @@ namespace Diver
                 x -= 16;
                 y -= 16;
                 play("breathe");
+                mode = "breathe";
                 this.velocity.X = 0;
                 acceleration.Y = 980;
-            }
 
+                float deepBonus = 1.0f / (float)((float)(Globals.diveHeight + Globals.poolDepth) - (float)deepestPointOfDive);
+                deepBonus *= 10000;
+
+                Console.WriteLine("Deep Bonus {0}  --------->{1} {2}", deepBonus, Globals.diveHeight, deepestPointOfDive);
+
+                Globals.addScore((int)deepBonus, "Deep Dive Bonus");
+
+
+                Globals.addScore(10, "Dive Complete");
+            }
         }
 
         /// <summary>
@@ -105,13 +128,17 @@ namespace Diver
         {
             //Console.WriteLine("Mode: " + mode);
 
+            // check deepest point
+            if (y > deepestPointOfDive)
+            {
+                deepestPointOfDive = y;
+            }
+
+
             if (_curFrame == 11 && _curAnim.name == "swan")
             {
                 Globals.addScore(5, "Swan Bonus");
-
-
             }
-
 
             if (mode == "dead")
             {
@@ -119,8 +146,12 @@ namespace Diver
                 acceleration.Y = 0;
                 velocity.X = 0;
                 velocity.Y = 0;
+                acceleration.Y = 980;
 
-                FlxG.fade.start(Color.Red, 2.0f);
+            }
+            else if (mode == "deadFloat")
+            {
+                acceleration.Y = 980;
             }
 
             if (FlxG.keys.justPressed(Keys.Space) && mode=="idle" && this.onFloor)
@@ -128,15 +159,13 @@ namespace Diver
                 play("swan");
                 velocity.Y = -300;
                 mode = "swan";
-
-                Console.WriteLine("Jumped! at {0} - dive Point {1} - distance {2}", x, Globals.jumpPoint, x - Globals.jumpPoint);
-
+                //Console.WriteLine("Jumped! at {0} - dive Point {1} - distance {2}", x, Globals.jumpPoint, x - Globals.jumpPoint);
+                Globals.addScore((int)(x - Globals.jumpPoint), "Jump Danger Bonus");
             }
             else if (mode == "idle" && this.velocity.Y > 0)
             {
                 play("fall");
                 mode = "fall";
-
             }
 
 
@@ -146,12 +175,18 @@ namespace Diver
                 mode = "dive";
 
             }
-            else if (FlxG.keys.justPressed(Keys.Space) && mode == "enterWater")
+            else if (FlxG.keys.justPressed(Keys.Space) && mode == "dive" && hasEnteredWater==true)
             {
-
-                setDrags(25, 4555);
+                setDrags(900, 3000);
                 acceleration.Y = 0;
 
+                play("enterWater");
+                mode = "enterWater";
+
+            }
+            
+            if (_curAnim.name == "enterWater" && _curFrame==3)
+            {
                 mode = "swim";
                 play("swim");
 
@@ -174,10 +209,6 @@ namespace Diver
                 animation();
             }
 
-
-
-
-
             if (velocity.X > 0)
             {
                 facing = Flx2DFacing.Left;
@@ -186,8 +217,6 @@ namespace Diver
             {
                 facing = Flx2DFacing.Right;
             }
-
-
 
             base.update();
         }
@@ -224,6 +253,7 @@ namespace Diver
             {
                 play("hitFloor");
                 mode = "dead";
+                Globals.addScore(-1000000, "Hit head");
             }
 
             base.hitBottom(Contact, Velocity);
@@ -251,7 +281,10 @@ namespace Diver
             }
             else
             {
+                mode = "deadFloat";
+                play("hitFloor");
 
+                Globals.addScore(-1000000, "Hit head");
             }
 
             base.hitLeft(Contact, Velocity);

@@ -19,6 +19,8 @@ namespace Diver
         FlxTileblock poolBottom;
         FlxTileblock poolSide;
 
+        FlxText score;
+
         override public void create()
         {
             //load level settings
@@ -41,11 +43,19 @@ namespace Diver
             poolSide.auto = FlxTileblock.OFF;
             poolSide.loadTiles("tile", 9, 9, 0);
 
-            FlxTileblock poolTile = new FlxTileblock(0, Globals.diveHeight, (int)poolSide.width + Globals.poolWidth + 900, Globals.poolDepth);
+            FlxTileblock poolTile = new FlxTileblock(0, Globals.diveHeight, (int)poolSide.width + Globals.poolWidth + 900, Globals.poolDepth + 9);
+            poolTile.auto = FlxTileblock.OFF;
+            poolTile.loadTiles("tile", 9, 9, 0);
+            poolTile.alpha = 0.3225f;
+            add(poolTile);
+
+            poolTile = new FlxTileblock(0, Globals.diveHeight + Globals.poolDepth - 90, (int)poolSide.width + Globals.poolWidth + 900, Globals.poolDepth + 9);
             poolTile.auto = FlxTileblock.OFF;
             poolTile.loadTiles("tile", 9, 9, 0);
             poolTile.alpha = 0.5225f;
             add(poolTile);
+
+
 
             add(poolSide);
 
@@ -62,7 +72,7 @@ namespace Diver
             divingPlatform.loadTiles("tile", 9,9,0);
             add(divingPlatform);
 
-            poolBottom = new FlxTileblock(0, Globals.diveHeight + Globals.poolDepth, 2700, 90);
+            poolBottom = new FlxTileblock(0, Globals.diveHeight + Globals.poolDepth, (int)poolSide.width + Globals.poolWidth + 900, 180);
             poolBottom.auto = FlxTileblock.OFF;
             poolBottom.loadTiles("tile", 9, 9, 0);
             add(poolBottom);
@@ -79,6 +89,11 @@ namespace Diver
 
             FlxG.score = 0;
 
+            score = new FlxText(0, 30, FlxG.width);
+            score.setFormat(null, 2, Color.White, FlxJustification.Center, Color.Black);
+            score.visible = false;
+            score.setScrollFactors(0, 0);
+            add(score);
         }
 
         override public void update()
@@ -88,16 +103,18 @@ namespace Diver
             {
                 FlxG._game.hud.setHudGamepadButton(FlxHud.TYPE_XBOX, FlxHud.xboxDPadLeft, 0, 0);
                 FlxG.showHud();
-                //FlxG._game.hud.timeToShowButton = 1.5f;
             }
-
+            else if (FlxControl.RIGHT)
+            {
+                FlxG._game.hud.setHudGamepadButton(FlxHud.TYPE_XBOX, FlxHud.xboxDPadRight, 0, 0);
+                FlxG.showHud();
+            }
             else if (FlxControl.ACTION)
             {
                 FlxG._game.hud.setHudGamepadButton(FlxHud.TYPE_XBOX, FlxHud.xboxButtonA, 0, 0);
                 FlxG.showHud();
-                //FlxG._game.hud.timeToShowButton = 1.5f;
-
             }
+
             else
             {
                 FlxG.hideHud();
@@ -107,25 +124,39 @@ namespace Diver
             FlxU.collide(diver, poolBottom);
             FlxU.collide(diver, poolSide);
 
-            if (diver.y > Globals.diveHeight && bubbles.canExplode < 25  && diver.mode!="swim")
+            if (diver.y > Globals.diveHeight && bubbles.canExplode < 35  && diver.mode!="swim")
             {
                 bubbles.at(diver);
+                bubbles.x -= 32;
+                bubbles.y -= 32;
 
-                bubbles.start(false, 0.0025f, 12);
+                bubbles.start(false, 0.0025f, 5);
                 bubbles.canExplode ++;
 
-                if (diver.mode!="enterWater")
+
+                if (diver.hasEnteredWater==false)
                     diver.check();
 
-                diver.play("enterWater");
-                diver.mode = "enterWater";
+                diver.hasEnteredWater = true;
+
+                //if (diver.mode!="enterWater")
+                //    diver.check();
+
+                //diver.play("enterWater");
+                //diver.mode = "enterWater";
 
             }
 
-            if (diver.mode == "swim" && diver.y <= Globals.diveHeight - diver.height/2 )
+            if (diver.mode == "swim" && diver.y <= (Globals.diveHeight - diver.height/2)-2 )
             {
                 diver.acceleration.Y = 0;
-                diver.velocity.Y = -10;
+                diver.velocity.Y = 10;
+            }
+
+            if (diver.mode == "breathe")
+            {
+                score.visible = true;
+                score.text = string.Format("Score {0}", FlxG.score);
             }
 
             if (FlxControl.CANCELJUSTPRESSED)

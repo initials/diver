@@ -30,7 +30,10 @@ namespace Diver
             if (FlxG.score < 0)
                 FlxG.score = 0;
 
-            Console.WriteLine("{0} Your score is now: {1}", Message, FlxG.score);
+            string msg = string.Format("{0} Your score is now: {1}", Message, FlxG.score);
+
+            Console.WriteLine(msg);
+            FlxG.log(msg);
 
         }
 
