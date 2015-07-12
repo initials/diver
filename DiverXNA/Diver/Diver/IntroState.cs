@@ -39,7 +39,7 @@ namespace Diver
                 Color.White, 2);
             add(x);
 
-            poolSide = new FlxTileblock(0, Globals.diveHeight - 3, 900, 1800);
+            poolSide = new FlxTileblock(0, Globals.diveHeight, 900, 1800);
             poolSide.auto = FlxTileblock.OFF;
             poolSide.loadTiles("tile", 9, 9, 0);
 
@@ -55,9 +55,7 @@ namespace Diver
             poolTile.alpha = 0.5225f;
             add(poolTile);
 
-
-
-            add(poolSide);
+            
 
             bgTile = new FlxTileblock(0, 0, (int)poolSide.width + Globals.poolWidth + 900, Globals.diveHeight);
             bgTile.auto = FlxTileblock.OFF;
@@ -76,6 +74,7 @@ namespace Diver
             poolBottom.auto = FlxTileblock.OFF;
             poolBottom.loadTiles("tile", 9, 9, 0);
             add(poolBottom);
+            add(poolSide);
 
             diver = new Diver((int)(divingPlatform.x + divingPlatform.width - 64), 90-48);
             add(diver);

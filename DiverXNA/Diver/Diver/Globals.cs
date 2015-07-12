@@ -9,7 +9,7 @@ namespace Diver
     public class Globals
     {
         // ---------- Set these to build level -------------
-        public static int diveHeight = 1000;
+        public static int diveHeight = 1000; 
         public static int poolWidth = 1500;
         public static int poolDepth = 700;
 

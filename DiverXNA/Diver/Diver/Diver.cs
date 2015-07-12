@@ -91,6 +91,10 @@ namespace Diver
             }
             else
             {
+                FlxG.quake.start(0.02f, 0.5f);
+
+                flicker(0.5f);
+
                 Globals.addScore(-1000, "Failed Entry");
             }
 
@@ -102,8 +106,11 @@ namespace Diver
 
             if (Name == "exitWater" && FrameIndex == 72)
             {
-                x -= 16;
-                y -= 16;
+                //x -= 16;
+                //y -= 16;
+
+                x = 900 - (width/1.5f) ;
+
                 play("breathe");
                 mode = "breathe";
                 this.velocity.X = 0;
@@ -112,11 +119,9 @@ namespace Diver
                 float deepBonus = 1.0f / (float)((float)(Globals.diveHeight + Globals.poolDepth) - (float)deepestPointOfDive);
                 deepBonus *= 10000;
 
-                Console.WriteLine("Deep Bonus {0}  --------->{1} {2}", deepBonus, Globals.diveHeight, deepestPointOfDive);
+                //Console.WriteLine("Deep Bonus {0}  --------->{1} {2}", deepBonus, Globals.diveHeight, deepestPointOfDive);
 
                 Globals.addScore((int)deepBonus, "Deep Dive Bonus");
-
-
                 Globals.addScore(10, "Dive Complete");
             }
         }
@@ -154,7 +159,7 @@ namespace Diver
                 acceleration.Y = 980;
             }
 
-            if (FlxG.keys.justPressed(Keys.Space) && mode=="idle" && this.onFloor)
+            if (FlxControl.ACTIONJUSTPRESSED && mode == "idle" && this.onFloor)
             {
                 play("swan");
                 velocity.Y = -300;
@@ -169,13 +174,13 @@ namespace Diver
             }
 
 
-            else if (FlxG.keys.justPressed(Keys.Space) && mode == "swan")
+            else if (FlxControl.ACTIONJUSTPRESSED && mode == "swan")
             {
                 play("dive");
                 mode = "dive";
 
             }
-            else if (FlxG.keys.justPressed(Keys.Space) && mode == "dive" && hasEnteredWater==true)
+            else if (FlxControl.ACTIONJUSTPRESSED && mode == "dive" && hasEnteredWater==true)
             {
                 setDrags(900, 3000);
                 acceleration.Y = 0;
