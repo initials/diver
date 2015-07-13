@@ -159,7 +159,7 @@ namespace Diver
                 acceleration.Y = 980;
             }
 
-            if (FlxControl.ACTIONJUSTPRESSED && mode == "idle" && this.onFloor)
+            if (FlxControl.ACTIONJUSTPRESSED && mode == "run" && this.onFloor)
             {
                 play("swan");
                 velocity.Y = -300;
@@ -203,16 +203,24 @@ namespace Diver
                 acceleration.Y = -125;
             }
 
-            if (FlxControl.LEFTJUSTPRESSED && (mode == "idle" || mode == "swim"))
+            if (FlxControl.ACTIONJUSTPRESSED && (mode == "idle" || mode == "swim"))
             {
-                velocity.X -= 46;
+                mode = "run";
+
+                acceleration.X -= 146;
                 animation();
             }
-            if (FlxControl.RIGHTJUSTPRESSED && (mode == "idle" || mode == "swim"))
-            {
-                velocity.X += 46;
-                animation();
-            }
+
+            //if (FlxControl.ACTIONJUSTPRESSED && (mode == "idle" || mode == "swim"))
+            //{
+            //    velocity.X -= 46;
+            //    animation();
+            //}
+            //if (FlxControl.ACTIONJUSTPRESSED && (mode == "idle" || mode == "swim"))
+            //{
+            //    velocity.X += 46;
+            //    animation();
+            //}
 
             if (velocity.X > 0)
             {

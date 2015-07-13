@@ -1,4 +1,10 @@
-﻿x=1024
+﻿x=512
+y=288
+fullscreen=0
+zoom=1
+language=English
+
+x=1024
 y=576
 fullscreen=0
 zoom=2
