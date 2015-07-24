@@ -89,11 +89,12 @@ namespace Diver
 
             FlxG.score = 0;
 
-            score = new InformationText(0, 30 );
+            score = new InformationText(0, 30, FlxG.width);
             score.setFormat(null, 2, Color.White, FlxJustification.Center, Color.Black);
             score.visible = false;
             score.setScrollFactors(0, 0);
             add(score);
+
         }
 
         override public void update()
@@ -153,12 +154,13 @@ namespace Diver
                 diver.velocity.Y = 10;
             }
 
-            if (diver.mode == "breathe")
+            if (diver.mode == "breathe" || diver.dead==true)
             {
                 score.visible = true;
-                score.text = string.Format("Score {0}", FlxG.score);
+                //score.text = string.Format("Score {0}", FlxG.score);
+                //Console.WriteLine("SCORE");
 
-                //score.displayScoreHistory();
+                score.displayScoreHistory();
 
             }
 

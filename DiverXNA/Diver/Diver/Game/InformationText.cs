@@ -16,8 +16,8 @@ namespace Diver
     {
         private int counter;
 
-        public InformationText(int xPos, int yPos)
-            : base(xPos, yPos, FlxG.width)
+        public InformationText(int xPos, int yPos, int Width)
+            : base(xPos, yPos, Width)
         {
             counter = 0;
         }
