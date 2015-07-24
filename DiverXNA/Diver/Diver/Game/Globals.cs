@@ -17,8 +17,15 @@ namespace Diver
 
         public static int jumpPoint;
 
+        public static List<Tuple<int, string>> scoreHistory = new List<Tuple<int, string>>();
+
 
         public Globals()
+        {
+            scoreHistory = new List<Tuple<int, string>>();
+        }
+
+        public static void purgeScoreHistory()
         {
 
         }
@@ -34,6 +41,9 @@ namespace Diver
 
             Console.WriteLine(msg);
             FlxG.log(msg);
+
+            scoreHistory.Add(new Tuple<int, string>(Score, Message));
+
 
         }
 

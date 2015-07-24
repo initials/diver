@@ -271,6 +271,7 @@ namespace Diver
                 play("hitFloor");
                 mode = "dead";
                 Globals.addScore(-1000000, "Hit head");
+                //dead = true;
             }
 
             base.hitBottom(Contact, Velocity);
@@ -298,11 +299,21 @@ namespace Diver
             }
             else
             {
+                x += 3;
+
+                acceleration.X = 0;
+                acceleration.Y = 0;
+                velocity.X = 0;
+                velocity.Y = 0;
+                setDrags(25, 25);
+
                 mode = "deadFloat";
                 play("hitFloor");
 
-                Globals.addScore(-1000000, "Hit head");
+                Globals.addScore(-1000000, "Hit head on side");
             }
+
+            //dead = true;
 
             base.hitLeft(Contact, Velocity);
         }

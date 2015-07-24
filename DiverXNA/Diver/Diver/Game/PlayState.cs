@@ -10,7 +10,7 @@ using System.Xml.Linq;
 
 namespace Diver
 {
-    public class IntroState : FlxState
+    public class PlayState : FlxState
     {
         Diver diver;
         Bubbles bubbles;
@@ -19,12 +19,13 @@ namespace Diver
         FlxTileblock poolBottom;
         FlxTileblock poolSide;
 
-        FlxText score;
+        InformationText score;
 
         override public void create()
         {
             //load level settings
 
+            Globals.purgeScoreHistory();
 
             FlxG.backColor = new Color(0,116,239);
             base.create();
@@ -88,7 +89,7 @@ namespace Diver
 
             FlxG.score = 0;
 
-            score = new FlxText(0, 30, FlxG.width);
+            score = new InformationText(0, 30 );
             score.setFormat(null, 2, Color.White, FlxJustification.Center, Color.Black);
             score.visible = false;
             score.setScrollFactors(0, 0);
@@ -156,11 +157,14 @@ namespace Diver
             {
                 score.visible = true;
                 score.text = string.Format("Score {0}", FlxG.score);
+
+                //score.displayScoreHistory();
+
             }
 
             if (FlxControl.CANCELJUSTPRESSED)
             {
-                FlxG.state = new IntroState();
+                FlxG.state = new PlayState();
                 return;
             }
 
