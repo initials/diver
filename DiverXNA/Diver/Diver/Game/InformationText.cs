@@ -31,7 +31,7 @@ namespace Diver
         {
             visible = true;
             text = Globals.scoreHistory[counter].Item2 + ": " + Globals.scoreHistory[counter / 10].Item1.ToString();
-            if (counter < Globals.scoreHistory.Count * 10)
+            if (counter < (Globals.scoreHistory.Count * 10)-1)
             {
                 counter++;
             }
