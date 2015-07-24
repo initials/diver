@@ -66,7 +66,7 @@ namespace Diver
 
             play("idle");
 
-            this.maxVelocity = new Vector2(600, 600);
+            this.maxVelocity = new Vector2(350, 600);
 
             this.velocity.X = 0;
             acceleration.Y = 980;
@@ -203,11 +203,15 @@ namespace Diver
                 acceleration.Y = -125;
             }
 
-            if (FlxControl.ACTIONJUSTPRESSED && (mode == "idle" || mode == "swim"))
+            if (FlxControl.ACTIONJUSTPRESSED && (mode == "idle" ))
             {
                 mode = "run";
 
                 acceleration.X -= 146;
+                animation();
+            }
+            if (mode == "run")
+            {
                 animation();
             }
 
