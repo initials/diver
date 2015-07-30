@@ -30,8 +30,8 @@ namespace Diver
         public void displayScoreHistory()
         {
             visible = true;
-            text = Globals.scoreHistory[counter].Item2 + ": " + Globals.scoreHistory[counter / 10].Item1.ToString();
-            if (counter < (Globals.scoreHistory.Count * 10)-1)
+            text = Globals.scoreHistory[counter].Item2 + ": " + Globals.scoreHistory[counter].Item1.ToString();
+            if (counter < Globals.scoreHistory.Count-1)
             {
                 counter++;
             }

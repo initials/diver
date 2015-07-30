@@ -17,6 +17,8 @@ namespace Diver
         public bool hasEnteredWater;
         private float deepestPointOfDive;
 
+        private FlxText debugText;
+
         /// <summary>
         /// Sprite Constructor
         /// </summary>
@@ -79,6 +81,11 @@ namespace Diver
 
             deepestPointOfDive = 0;
 
+            debugText = new FlxText(xPos, yPos, 100);
+            debugText.setScrollFactors(1, 1);
+
+            
+
         }
 
         public void check()
@@ -133,6 +140,11 @@ namespace Diver
         {
             //Console.WriteLine("Mode: " + mode);
 
+            debugText.x = x;
+            debugText.y = y;
+            debugText.text = mode + "\n" + acceleration.X;
+
+
             // check deepest point
             if (y > deepestPointOfDive)
             {
@@ -182,7 +194,7 @@ namespace Diver
             }
             else if (FlxControl.ACTIONJUSTPRESSED && mode == "dive" && hasEnteredWater==true)
             {
-                setDrags(900, 3000);
+                setDrags(5500, 5500);
                 acceleration.Y = 0;
 
                 play("enterWater");
@@ -199,8 +211,17 @@ namespace Diver
 
             if (mode == "swim" && velocity.Y == 0)
             {
-                setDrags(25, 25);
+                setDrags(4500, 4500);
                 acceleration.Y = -125;
+            }
+
+            if (mode == "swim")
+            {
+                setDrags(3500, 3500);
+                if (FlxControl.ACTIONJUSTPRESSED)
+                {
+                    acceleration.X += 50;
+                }
             }
 
             if (FlxControl.ACTIONJUSTPRESSED && (mode == "idle" ))
@@ -236,6 +257,8 @@ namespace Diver
             }
 
             base.update();
+
+
         }
 
         public void animation()
@@ -255,6 +278,8 @@ namespace Diver
         /// <param name="spriteBatch"></param>
         public override void render(SpriteBatch spriteBatch)
         {
+            debugText.render(spriteBatch);
+
             base.render(spriteBatch);
         }
 
@@ -284,7 +309,7 @@ namespace Diver
         /// <param name="Velocity"></param>
         public override void hitLeft(FlxObject Contact, float Velocity)
         {
-            //Console.WriteLine("HITLEFT - Score: " + FlxG.score.ToString() + " " + Velocity);
+            Console.WriteLine("HITLEFT - Score: " + FlxG.score.ToString() + " " + Velocity);
 
             if (y <= Globals.diveHeight - height / 2)
             {
