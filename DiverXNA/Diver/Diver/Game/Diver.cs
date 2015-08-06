@@ -220,7 +220,10 @@ namespace Diver
                 setDrags(3500, 3500);
                 if (FlxControl.ACTIONJUSTPRESSED)
                 {
-                    acceleration.X += 50;
+                    //acceleration.X = 0;
+
+                    velocity.X /= 2;
+
                 }
             }
 
