@@ -83,6 +83,7 @@ namespace Diver
 
             debugText = new FlxText(xPos, yPos, 100);
             debugText.setScrollFactors(1, 1);
+            debugText.alignment = FlxJustification.Left;
 
             
 
@@ -116,12 +117,12 @@ namespace Diver
                 //x -= 16;
                 //y -= 16;
 
-                x = 900 - (width/1.5f) ;
+                //x = 900 - (width/1.5f) ;
 
                 play("breathe");
                 mode = "breathe";
                 this.velocity.X = 0;
-                acceleration.Y = 980;
+                //acceleration.Y = 980;
 
                 float deepBonus = 1.0f / (float)((float)(Globals.diveHeight + Globals.poolDepth) - (float)deepestPointOfDive);
                 deepBonus *= 10000;
@@ -140,9 +141,9 @@ namespace Diver
         {
             //Console.WriteLine("Mode: " + mode);
 
-            debugText.x = x;
+            debugText.x = x + 50;
             debugText.y = y;
-            debugText.text = mode + "\n" + acceleration.X;
+            debugText.text = mode + "\nacc.x: " + acceleration.X + "\nvel.x: " + velocity.X + "\ndrag.x: " + drag.X;
 
 
             // check deepest point
@@ -176,6 +177,9 @@ namespace Diver
                 play("swan");
                 velocity.Y = -300;
                 mode = "swan";
+
+                setDrags(155, 155);
+
                 //Console.WriteLine("Jumped! at {0} - dive Point {1} - distance {2}", x, Globals.jumpPoint, x - Globals.jumpPoint);
                 Globals.addScore((int)(x - Globals.jumpPoint), "Jump Danger Bonus");
             }
@@ -207,6 +211,8 @@ namespace Diver
                 mode = "swim";
                 play("swim");
 
+                acceleration.X = 0;
+                //acceleration.X = 0;
             }
 
             if (mode == "swim" && velocity.Y == 0)
@@ -217,13 +223,34 @@ namespace Diver
 
             if (mode == "swim")
             {
-                setDrags(3500, 3500);
+                if (velocity.X < -12)
+                {
+                    setDrags(333, 333);
+                }
+                else
+                {
+                    setDrags(125, 125);
+                    velocity.X = -50;
+
+                }
+
                 if (FlxControl.ACTIONJUSTPRESSED)
                 {
-                    //acceleration.X = 0;
+                    //acceleration.X /= 5;
 
-                    velocity.X /= 2;
+                    ////velocity.X /= 2;
 
+                    //if (acceleration.X > 0)
+                    //{
+                    //    acceleration.X = 0;
+                    //}
+
+                    if (y <= Globals.diveHeight - height / 2)
+                    {
+                        velocity.X -= 250;
+
+                        setDrags(25, 25);
+                    }
                 }
             }
 
