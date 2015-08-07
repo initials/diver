@@ -308,7 +308,8 @@ namespace Diver
         /// <param name="spriteBatch"></param>
         public override void render(SpriteBatch spriteBatch)
         {
-            debugText.render(spriteBatch);
+            if (FlxG.debug)
+                debugText.render(spriteBatch);
 
             base.render(spriteBatch);
         }

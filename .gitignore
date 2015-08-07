@@ -9,3 +9,5 @@ DiverXNA/Diver/Diver/bin/x86/Debug/OgmoEditor2/SportsGround.oel
 DiverXNA/Diver/Diver/obj/x86/Debug/ContentPipeline-{E3D7C5C9-FC6B-420C-9336-AB688A003887}.xml
 *.cachefile
 DiverXNA/Diver/Diver/bin/x86/Debug/FarseerPhysics XNA.xml
+DiverXNA/Diver/Diver/bin/x86/Release/*
+DiverXNA/Diver/Diver/bin/*

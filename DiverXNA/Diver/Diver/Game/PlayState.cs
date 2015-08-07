@@ -99,26 +99,27 @@ namespace Diver
 
         override public void update()
         {
-            
-            if (FlxControl.LEFT)
+            if (FlxG.debug)
             {
-                FlxG._game.hud.setHudGamepadButton(FlxHud.TYPE_XBOX, FlxHud.xboxDPadLeft, 0, 0);
-                FlxG.showHud();
-            }
-            else if (FlxControl.RIGHT)
-            {
-                FlxG._game.hud.setHudGamepadButton(FlxHud.TYPE_XBOX, FlxHud.xboxDPadRight, 0, 0);
-                FlxG.showHud();
-            }
-            else if (FlxControl.ACTION)
-            {
-                FlxG._game.hud.setHudGamepadButton(FlxHud.TYPE_XBOX, FlxHud.xboxButtonA, 0, 0);
-                FlxG.showHud();
-            }
-
-            else
-            {
-                FlxG.hideHud();
+                if (FlxControl.LEFT)
+                {
+                    FlxG._game.hud.setHudGamepadButton(FlxHud.TYPE_XBOX, FlxHud.xboxDPadLeft, 0, 0);
+                    FlxG.showHud();
+                }
+                else if (FlxControl.RIGHT)
+                {
+                    FlxG._game.hud.setHudGamepadButton(FlxHud.TYPE_XBOX, FlxHud.xboxDPadRight, 0, 0);
+                    FlxG.showHud();
+                }
+                else if (FlxControl.ACTION)
+                {
+                    FlxG._game.hud.setHudGamepadButton(FlxHud.TYPE_XBOX, FlxHud.xboxButtonA, 0, 0);
+                    FlxG.showHud();
+                }
+                else
+                {
+                    FlxG.hideHud();
+                }
             }
 
             FlxU.collide(diver, divingPlatform);
