@@ -27,12 +27,12 @@ namespace Diver
         public Diver(int xPos, int yPos)
             : base(xPos, yPos)
         {
-            loadGraphic("diver_04", true, false, 64, 64);
+            loadGraphic("diver_05", true, false, 128, 128);
 
             width = 48;
             height = 48;
 
-            setOffset(8, 16);
+            setOffset(32 + 8, 32 + 16);
 
             addAnimation("idle", new int[] { 81,82 }, 4, true);
 

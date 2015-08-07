@@ -186,3 +186,4 @@ C:\Users\Shane\Documents\Visual Studio 2010\Projects\diver\DiverXNA\Diver\Diver\
 C:\Users\Shane\Documents\Visual Studio 2010\Projects\diver\DiverXNA\Diver\Diver\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
 C:\Users\Shane\Documents\Visual Studio 2010\Projects\diver\DiverXNA\Diver\Diver\obj\x86\Debug\dive.exe
 C:\Users\Shane\Documents\Visual Studio 2010\Projects\diver\DiverXNA\Diver\Diver\obj\x86\Debug\dive.pdb
+E:\VisualStudio2010\diver\DiverXNA\Diver\Diver\bin\x86\Debug\Content\diver_05.xnb

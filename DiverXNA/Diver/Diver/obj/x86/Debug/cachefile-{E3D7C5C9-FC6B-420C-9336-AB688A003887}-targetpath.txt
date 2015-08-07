@@ -4,3 +4,4 @@ Content\tile.xnb
 Content\poolSide.xnb
 Content\diver_03.xnb
 Content\diver_04.xnb
+Content\diver_05.xnb

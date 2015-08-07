@@ -55,6 +55,15 @@
       <Output>E:\VisualStudio2010\diver\DiverXNA\Diver\Diver\bin\x86\Debug\Content\diver_04.xnb</Output>
       <Time>2015-07-11T11:49:55.8259698+10:00</Time>
     </Item>
+    <Item>
+      <Source>diver_05.png</Source>
+      <Name>diver_05</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>E:\VisualStudio2010\diver\DiverXNA\Diver\Diver\bin\x86\Debug\Content\diver_05.xnb</Output>
+      <Time>2015-08-07T14:25:37.4107322+10:00</Time>
+    </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
       <ContentProjectGUID>{E3D7C5C9-FC6B-420C-9336-AB688A003887}</ContentProjectGUID>
