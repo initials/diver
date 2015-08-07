@@ -143,7 +143,7 @@ namespace Diver
 
             debugText.x = x + 50;
             debugText.y = y;
-            debugText.text = mode + "\nacc.x: " + acceleration.X + "\nvel.x: " + velocity.X + "\ndrag.x: " + drag.X;
+            debugText.text = mode + "\nacc.x: " + acceleration.X + "\nvel.x: " + velocity.X + "\ndrag.x: " + drag.X + "\nx: " + this.x + "\ny: " + this.y;
 
 
             // check deepest point
