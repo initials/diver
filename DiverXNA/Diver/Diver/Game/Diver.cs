@@ -181,7 +181,10 @@ namespace Diver
                 setDrags(155, 155);
 
                 //Console.WriteLine("Jumped! at {0} - dive Point {1} - distance {2}", x, Globals.jumpPoint, x - Globals.jumpPoint);
-                Globals.addScore((int)(x - Globals.jumpPoint), "Jump Danger Bonus");
+                
+                Globals.addScore((int)((x + width) - Globals.jumpPoint), "Jump Danger Bonus");
+
+                
             }
             else if (mode == "idle" && this.velocity.Y > 0)
             {

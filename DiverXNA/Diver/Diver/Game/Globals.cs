@@ -19,15 +19,22 @@ namespace Diver
 
         public static List<Tuple<int, string>> scoreHistory = new List<Tuple<int, string>>();
 
+        public static Dictionary<string, int> scoreDict = new Dictionary<string, int>();
+
+
 
         public Globals()
         {
             scoreHistory = new List<Tuple<int, string>>();
+
+            scoreDict = new Dictionary<string, int>();
         }
 
         public static void purgeScoreHistory()
         {
+            scoreHistory = new List<Tuple<int, string>>();
 
+            scoreDict = new Dictionary<string, int>();
         }
 
         public static void addScore(int Score, string Message)
@@ -43,6 +50,20 @@ namespace Diver
             FlxG.log(msg);
 
             scoreHistory.Add(new Tuple<int, string>(Score, Message));
+
+            if (scoreDict.ContainsKey(Message))
+            {
+
+                int existingScore = scoreDict[Message];
+                int newScore = existingScore + Score;
+
+                scoreDict[Message] = newScore ;
+            }
+            else
+            {
+                scoreDict[Message] = Score;
+
+            }
 
 
         }

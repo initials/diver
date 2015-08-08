@@ -7,8 +7,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>E:\VisualStudio2010\diver\DiverXNA\Diver\Diver\bin\x86\Debug\Content\bubble.xnb</Output>
-      <Time>2015-07-09T13:07:48.6946263+10:00</Time>
+      <Output>C:\Users\Shane\Documents\Visual Studio 2010\Projects\diver\DiverXNA\Diver\Diver\bin\x86\Debug\Content\bubble.xnb</Output>
+      <Time>2015-07-11T14:49:20.6312085+10:00</Time>
     </Item>
     <Item>
       <Source>diver_02.png</Source>
@@ -16,8 +16,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>E:\VisualStudio2010\diver\DiverXNA\Diver\Diver\bin\x86\Debug\Content\diver_02.xnb</Output>
-      <Time>2015-07-09T13:16:49.4315547+10:00</Time>
+      <Output>C:\Users\Shane\Documents\Visual Studio 2010\Projects\diver\DiverXNA\Diver\Diver\bin\x86\Debug\Content\diver_02.xnb</Output>
+      <Time>2015-07-11T14:49:20.6322086+10:00</Time>
     </Item>
     <Item>
       <Source>tile.png</Source>
@@ -25,8 +25,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>E:\VisualStudio2010\diver\DiverXNA\Diver\Diver\bin\x86\Debug\Content\tile.xnb</Output>
-      <Time>2015-07-09T13:55:39.8124013+10:00</Time>
+      <Output>C:\Users\Shane\Documents\Visual Studio 2010\Projects\diver\DiverXNA\Diver\Diver\bin\x86\Debug\Content\tile.xnb</Output>
+      <Time>2015-07-11T14:49:20.6472094+10:00</Time>
     </Item>
     <Item>
       <Source>poolSide.png</Source>
@@ -34,8 +34,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>E:\VisualStudio2010\diver\DiverXNA\Diver\Diver\bin\x86\Debug\Content\poolSide.xnb</Output>
-      <Time>2015-07-09T16:44:56.4758313+10:00</Time>
+      <Output>C:\Users\Shane\Documents\Visual Studio 2010\Projects\diver\DiverXNA\Diver\Diver\bin\x86\Debug\Content\poolSide.xnb</Output>
+      <Time>2015-07-11T14:49:20.6462094+10:00</Time>
     </Item>
     <Item>
       <Source>diver_03.png</Source>
@@ -43,8 +43,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>E:\VisualStudio2010\diver\DiverXNA\Diver\Diver\bin\x86\Debug\Content\diver_03.xnb</Output>
-      <Time>2015-07-09T17:17:15.2117206+10:00</Time>
+      <Output>C:\Users\Shane\Documents\Visual Studio 2010\Projects\diver\DiverXNA\Diver\Diver\bin\x86\Debug\Content\diver_03.xnb</Output>
+      <Time>2015-07-11T14:49:20.6362088+10:00</Time>
     </Item>
     <Item>
       <Source>diver_04.png</Source>
@@ -52,8 +52,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>E:\VisualStudio2010\diver\DiverXNA\Diver\Diver\bin\x86\Debug\Content\diver_04.xnb</Output>
-      <Time>2015-07-11T11:49:55.8259698+10:00</Time>
+      <Output>C:\Users\Shane\Documents\Visual Studio 2010\Projects\diver\DiverXNA\Diver\Diver\bin\x86\Debug\Content\diver_04.xnb</Output>
+      <Time>2015-07-11T14:49:20.6412091+10:00</Time>
     </Item>
     <Item>
       <Source>diver_05.png</Source>
@@ -61,8 +61,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>E:\VisualStudio2010\diver\DiverXNA\Diver\Diver\bin\x86\Debug\Content\diver_05.xnb</Output>
-      <Time>2015-08-07T17:15:16.153923+10:00</Time>
+      <Output>C:\Users\Shane\Documents\Visual Studio 2010\Projects\diver\DiverXNA\Diver\Diver\bin\x86\Debug\Content\diver_05.xnb</Output>
+      <Time>2015-08-08T17:08:15.778207+10:00</Time>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
@@ -71,39 +71,39 @@
       <TargetProfile>HiDef</TargetProfile>
       <BuildConfiguration>Debug</BuildConfiguration>
       <CompressContent>false</CompressContent>
-      <RootDirectory>E:\VisualStudio2010\diver\DiverXNA\Diver\DiverContent\</RootDirectory>
-      <LoggerRootDirectory>E:\VisualStudio2010\diver\DiverXNA\Diver\Diver\</LoggerRootDirectory>
-      <IntermediateDirectory>E:\VisualStudio2010\diver\DiverXNA\Diver\Diver\obj\x86\Debug\</IntermediateDirectory>
-      <OutputDirectory>E:\VisualStudio2010\diver\DiverXNA\Diver\Diver\bin\x86\Debug\Content\</OutputDirectory>
+      <RootDirectory>C:\Users\Shane\Documents\Visual Studio 2010\Projects\diver\DiverXNA\Diver\DiverContent\</RootDirectory>
+      <LoggerRootDirectory>C:\Users\Shane\Documents\Visual Studio 2010\Projects\diver\DiverXNA\Diver\Diver\</LoggerRootDirectory>
+      <IntermediateDirectory>C:\Users\Shane\Documents\Visual Studio 2010\Projects\diver\DiverXNA\Diver\Diver\obj\x86\Debug\</IntermediateDirectory>
+      <OutputDirectory>C:\Users\Shane\Documents\Visual Studio 2010\Projects\diver\DiverXNA\Diver\Diver\bin\x86\Debug\Content\</OutputDirectory>
     </Settings>
     <Assemblies>
       <Assembly>
         <Key>C:\Program Files (x86)\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.XImporter.dll</Key>
-        <Value>2011-09-01T16:22:30+10:00</Value>
+        <Value>2011-09-01T15:22:30+10:00</Value>
       </Assembly>
       <Assembly>
         <Key>C:\Program Files (x86)\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.VideoImporters.dll</Key>
-        <Value>2011-09-01T16:22:30+10:00</Value>
+        <Value>2011-09-01T15:22:30+10:00</Value>
       </Assembly>
       <Assembly>
         <Key>C:\Program Files (x86)\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.TextureImporter.dll</Key>
-        <Value>2011-09-01T16:22:30+10:00</Value>
+        <Value>2011-09-01T15:22:30+10:00</Value>
       </Assembly>
       <Assembly>
         <Key>C:\Program Files (x86)\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.FBXImporter.dll</Key>
-        <Value>2011-09-01T16:22:30+10:00</Value>
+        <Value>2011-09-01T15:22:30+10:00</Value>
       </Assembly>
       <Assembly>
         <Key>C:\Program Files (x86)\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.EffectImporter.dll</Key>
-        <Value>2011-09-01T16:22:30+10:00</Value>
+        <Value>2011-09-01T15:22:30+10:00</Value>
       </Assembly>
       <Assembly>
         <Key>C:\Program Files (x86)\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.AudioImporters.dll</Key>
-        <Value>2011-09-01T16:22:30+10:00</Value>
+        <Value>2011-09-01T15:22:30+10:00</Value>
       </Assembly>
       <Assembly>
         <Key>C:\Windows\Microsoft.Net\assembly\GAC_32\Microsoft.Xna.Framework.Content.Pipeline\v4.0_4.0.0.0__842cf8be1de50553\Microsoft.Xna.Framework.Content.Pipeline.dll</Key>
-        <Value>2014-06-04T18:03:36.0505533+10:00</Value>
+        <Value>2013-12-11T22:26:11.6622585+11:00</Value>
       </Assembly>
     </Assemblies>
   </Asset>

@@ -19,7 +19,7 @@ namespace Diver
         FlxTileblock poolBottom;
         FlxTileblock poolSide;
 
-        InformationText score;
+        InformationText scoreText;
 
         override public void create()
         {
@@ -89,11 +89,11 @@ namespace Diver
 
             FlxG.score = 0;
 
-            score = new InformationText(0, 30, FlxG.width);
-            score.setFormat(null, 2, Color.White, FlxJustification.Center, Color.Black);
-            score.visible = false;
-            score.setScrollFactors(0, 0);
-            add(score);
+            scoreText = new InformationText(0, 30, FlxG.width);
+            scoreText.setFormat(null, 2, Color.White, FlxJustification.Center, Color.Black);
+            scoreText.visible = false;
+            scoreText.setScrollFactors(0, 0);
+            add(scoreText);
 
         }
 
@@ -157,11 +157,11 @@ namespace Diver
 
             if (diver.mode == "breathe" || diver.dead==true)
             {
-                score.visible = true;
+                scoreText.visible = true;
                 //score.text = string.Format("Score {0}", FlxG.score);
                 //Console.WriteLine("SCORE");
 
-                score.displayScoreHistory();
+                scoreText.displayScoreHistory();
 
             }
 
