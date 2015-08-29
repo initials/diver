@@ -104,6 +104,10 @@ namespace Diver
                 flicker(0.5f);
 
                 Globals.addScore(-1000, "Failed Entry");
+
+                enterWater();
+
+
             }
 
         }
@@ -201,11 +205,7 @@ namespace Diver
             }
             else if (FlxControl.ACTIONJUSTPRESSED && mode == "dive" && hasEnteredWater==true)
             {
-                setDrags(5500, 5500);
-                acceleration.Y = 0;
-
-                play("enterWater");
-                mode = "enterWater";
+                enterWater();
 
             }
             
@@ -267,6 +267,12 @@ namespace Diver
             if (mode == "run")
             {
                 animation();
+
+                if (velocity.Y > 50)
+                {
+                    play("swan");
+                    mode = "swan";
+                }
             }
 
             //if (FlxControl.ACTIONJUSTPRESSED && (mode == "idle" || mode == "swim"))
@@ -292,6 +298,15 @@ namespace Diver
             base.update();
 
 
+        }
+
+        private void enterWater()
+        {
+            setDrags(5500, 5500);
+            acceleration.Y = 0;
+
+            play("enterWater");
+            mode = "enterWater";
         }
 
         public void animation()

@@ -158,6 +158,7 @@ namespace Diver
             if (diver.mode == "breathe" || diver.dead==true)
             {
                 scoreText.visible = true;
+
                 //score.text = string.Format("Score {0}", FlxG.score);
                 //Console.WriteLine("SCORE");
 
